@@ -67,4 +67,59 @@ https://github.com/Sergey8Rybkin/Dragon-Picker
 
 ![LaRKb07HDf](https://user-images.githubusercontent.com/100475554/195143675-1ce91cc6-910d-4537-b8bf-dd0e3bcd4515.gif)
 
-      
+Переходим к программированию скрипта нашего дракона
+На сцене наш дракон должен
+1. Перелетать по сцене
+2. При этом он не должен улетать за края экрана
+3. При этом должен это делать "случайным образом
+
+Создаём C# script.
+Для начала инициализируем переменные которые мы сможем изменять при отладке: скорость, время между падением яиц, дистанция на которую дракон перемещается влево и вправо, и шанс изменения направления
+Каждый кадр мы хотим чтобы наш дракон перемещался по сцене, и не хотим чтобы он улетал дальше заданной дистанции. Прописываем это в нашем скрипте.
+Для случайности перемещения, мы делаем проверку. Каждый кадр передаём случайное значение. Если оно будет меньше нашей заданной величины, обращаем движение дракона.
+
+В результате получаем вот такой скрипт
+```c#
+using UnityEngine;
+
+public class EnemyDragon : MonoBehaviour
+{
+
+    public float speed = 1;
+
+    public float timeBetweenEggDrops = 1f;
+
+    public float leftRightDistance = 10f;
+
+    public float changeDirection = 0.01f;
+    // Start is called before the first frame update
+    void Start()
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        Vector3 pos = transform.position;
+        pos.x += speed * Time.deltaTime;
+        transform.position = pos;
+
+        if (pos.x < -leftRightDistance){
+            speed = Mathf.Abs(speed);
+        }
+        else if (pos.x > leftRightDistance) {
+            speed = -Mathf.Abs(speed);
+        }
+    }
+
+
+    private void FixedUpdate() {
+        if (Random.value < changeDirection) {
+            speed *= -1;
+        }
+    }
+}
+```
+И вот такой результат на сцене
+
+![oGwNFY4Vbr](https://user-images.githubusercontent.com/100475554/195147411-30810bae-46d4-4799-b2c4-46615eff0e9f.gif)
+

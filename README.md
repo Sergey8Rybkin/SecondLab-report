@@ -292,3 +292,5 @@ public class DragonPicker : MonoBehaviour
 3. Научились взаимодействию с анимациями.
 4. Научились с помощью скрипта перемещать объекты, спавнить, уничтожать, добавлять Particle System.
 5. Ознакомились с функционалом Particle System.
+
+Ссылка на проект https://github.com/Sergey8Rybkin/Dragon-Picker

@@ -57,3 +57,12 @@ https://github.com/Sergey8Rybkin/Dragon-Picker
 
 ![eA02unz84m](https://user-images.githubusercontent.com/100475554/195142330-913da81a-b9ca-41e5-bc8f-eb6d9a5bafb3.gif)
 
+В следующей части задания, нам необходимо выставить удобные значения камеры, и написать скрипт перемещения для нашего дракона.      
+
+Начнём с камеры. Нам нужно сделать так чтобы камера была максимально удобна и информативна для нашего игрока
+Задаём ей значения ![image](https://user-images.githubusercontent.com/100475554/195143191-1685eaf4-68e7-4f78-9d6d-0119e02ae816.png)
+И получаем такую игровую сцену. Также настраиваем Aspect ratio 16.9 тк это является стандартным разрешением
+
+![LaRKb07HDf](https://user-images.githubusercontent.com/100475554/195143675-1ce91cc6-910d-4537-b8bf-dd0e3bcd4515.gif)
+
+      

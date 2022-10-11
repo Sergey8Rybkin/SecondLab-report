@@ -229,3 +229,51 @@ public class DragonEgg : MonoBehaviour
     }
 }
 ```
+
+Так-же добавляем новый материалл нашему яйцу и настраиваем элемент 
+![image](https://user-images.githubusercontent.com/100475554/195152378-a5aa77e6-0a5c-4c04-b873-a7a88891d427.png)
+
+Конечный вид на сцене это будет иметь вот такой
+
+![unknown_2022 10 11-21 52_1](https://user-images.githubusercontent.com/100475554/195153763-c9e29694-f28a-4d59-8e54-f5dbb1cabbe7.gif)
+
+Оставшееся задание осталось создать скрипт в котором мы будем выполнять движение нашей "кареткой"
+Создаём скрипт с созвучным названием нашей игры
+В скрипте прописываем 
+-спавн каретки
+-её расположение на сцене
+-её размер
+
+Инициализируем переменные. Переменную для префаба каретки. Переменную количества щитов (в будующем можно будет увеличивать размер каретки). Переменную расположения. Радиус щита
+
+Прописываем цикл, с помощью которого на нашей сцене будут создаваться щиты, в будующем можно будет так-же бонусами изменять резмер каретки игрока.
+
+```c#
+using UnityEngine;
+
+public class DragonPicker : MonoBehaviour
+{
+    public GameObject energyShieldPrefab;
+
+    public int numEnergyShield = 3;
+
+    public float energyShieldBottomY = -6f;
+
+    public float energyShieldRadius = 1.5f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        for (int i = 1; i <= numEnergyShield; i++){
+            GameObject tShieldGo = Instantiate<GameObject>(energyShieldPrefab);
+            tShieldGo.transform.position = new Vector3(0, energyShieldBottomY, 0);
+            tShieldGo.transform.localScale = new Vector3(1*i, 1*i, 1*i);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+```

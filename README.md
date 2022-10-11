@@ -123,3 +123,9 @@ public class EnemyDragon : MonoBehaviour
 
 ![oGwNFY4Vbr](https://user-images.githubusercontent.com/100475554/195147411-30810bae-46d4-4799-b2c4-46615eff0e9f.gif)
 
+В следующей части задания мы разнообразим свою сцену, а так-же создадим скрипт сбрасывания яйца.
+
+Сперва импортируем новый ассет пак который нам поможет с задачей разнообразия нашей игровой сцены
+
+![Снимок экрана (10)](https://user-images.githubusercontent.com/100475554/195148099-a4025714-63e1-41e6-b52f-e94fc62927e5.png)
+

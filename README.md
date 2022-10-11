@@ -49,3 +49,11 @@ https://github.com/Sergey8Rybkin/Dragon-Picker
 -Наносим материал
 
 ![image](https://user-images.githubusercontent.com/100475554/195140151-24a8c8c3-31ec-4e19-b92c-24a4b9f9f952.png)
+
+Ещё нам нужно чем-то ловить наши яйца. 
+Создаём сферу, увеличиваем, размещаем чуть ниже дракона.
+Так-же нам для сферы нужен материал
+Получаем картинку ниже
+
+![eA02unz84m](https://user-images.githubusercontent.com/100475554/195142330-913da81a-b9ca-41e5-bc8f-eb6d9a5bafb3.gif)
+

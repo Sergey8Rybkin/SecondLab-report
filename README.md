@@ -78,7 +78,7 @@ https://github.com/Sergey8Rybkin/Dragon-Picker
 Каждый кадр мы хотим чтобы наш дракон перемещался по сцене, и не хотим чтобы он улетал дальше заданной дистанции. Прописываем это в нашем скрипте.
 Для случайности перемещения, мы делаем проверку. Каждый кадр передаём случайное значение. Если оно будет меньше нашей заданной величины, обращаем движение дракона.
 
-В результате получаем вот такой скрипт
+В результате получаем вот такой скрипт (не законченная версия)
 ```c#
 using UnityEngine;
 
@@ -129,3 +129,103 @@ public class EnemyDragon : MonoBehaviour
 
 ![Снимок экрана (10)](https://user-images.githubusercontent.com/100475554/195148099-a4025714-63e1-41e6-b52f-e94fc62927e5.png)
 
+На данном этапе нужно создать скрипт сбрасывания яиц, и их уничтожение
+Во-первых создадим Plane при пересечении с которым наше яйцо будет уничтожаться, а у игрока в будующем будет вычитаться жизнь. Можем сразу дать магматический материал, чтобы выглядело интереснее и размещаем его на сцене.
+
+![image](https://user-images.githubusercontent.com/100475554/195149662-7f6efd3a-9f8c-4167-bc37-56af314a1025.png)
+
+Далее займёмся нашими яйцами
+Нам нужно
+1. Чтобы яйца падали из дракона
+2. При пересечении поверхности яйца должны пропадать создавая явный эффект
+3. Так-же делаем ограничение на котором наши яйца должны уничтожаться в любом случае
+
+Реализуем спавн яиц в нашем скрипте дракона, чтобы мы понимали откуда производить спавн. Так-же добавляем переменную в которую передаём префаб нашего яйца
+```c#
+using UnityEngine;
+
+public class EnemyDragon : MonoBehaviour
+{
+
+    public GameObject DragonEggPrefab;
+
+    public float speed = 1;
+
+    public float timeBetweenEggDrops = 1f;
+
+    public float leftRightDistance = 10f;
+
+    public float changeDirection = 0.01f;
+    // Start is called before the first frame update
+    void Start()
+    {
+       Invoke ("DropEgg", 2f);
+    }
+
+
+    
+    void DropEgg(){
+        Vector3 myVector = new Vector3(0.0f, 5.0f, 0.0f);
+        GameObject egg = Instantiate<GameObject>(DragonEggPrefab);
+        egg.transform.position = transform.position + myVector;
+        Invoke("DropEgg", timeBetweenEggDrops);
+    }
+    // Update is called once per frame
+    
+    void Update()
+    {
+        Vector3 pos = transform.position;
+        pos.x += speed * Time.deltaTime;
+        transform.position = pos;
+
+        if (pos.x < -leftRightDistance){
+            speed = Mathf.Abs(speed);
+        }
+        else if (pos.x > leftRightDistance) {
+            speed = -Mathf.Abs(speed);
+        }
+    }
+
+
+    private void FixedUpdate() {
+        if (Random.value < changeDirection) {
+            speed *= -1;
+        }
+    }
+}
+```
+
+Создаём новый скрипт конкретно для уничтожения яйца. В нём задаём условия при которых яйцо должно уничтожаться. Так-же создаём реакцию в виде Particle System. Она будет наглядно показывать игроку что произошло
+
+Скрипт выглядит так
+```c#
+using UnityEngine;
+
+public class DragonEgg : MonoBehaviour
+{
+
+    public static float bottomY = -37f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        var em = ps.emission;
+        em.enabled = true;
+
+        Renderer rend;
+        rend = GetComponent<Renderer>();
+        rend.enabled = false;
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.y < bottomY) {
+            Destroy(this.gameObject);
+        }
+    }
+}
+```
